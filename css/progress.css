@@ -1,0 +1,10 @@
+.progress {
+  --diameter: 100px;
+  --stroke: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  height: var(--diameter);
+  width: var(--diameter);
+  position: relative;
+  box-shadow: 2px 2px 2px 0 rgb(0 0 0 / 30%);
+}

@@ -1,0 +1,50 @@
+.progress {
+  $rotationSteps: 100;
+  $rotationIncrement: (360 / $rotationSteps) / 2;
+
+  --diameter: 100px;
+  --stroke: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  height: var(--diameter);
+  width: var(--diameter);
+  position: relative;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+
+  &__mask,
+  &__fill {
+    border-radius: 50%;
+    clip: rect(0, var(--diameter), var(--diameter), calc(var(--diameter) / 2));
+    height: var(--diameter);
+    width: var(--diameter);
+    overflow: hidden;
+    position: absolute;
+  }
+  &__fill {
+    background: #41c519;
+    clip: rect(0, calc(var(--diameter) / 2), var(--diameter), 0);
+  }
+  &:after {
+    position: absolute;
+    content: attr(data-progress);
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    bottom: var(--stroke);
+    top: var(--stroke);
+    left: var(--stroke);
+    right: var(--stroke);
+    justify-content: center;
+    align-items: center;
+    color: #0f2027;
+    font-size: 1.5rem;
+  }
+  @for $step from 1 through $rotationSteps {
+    &[data-progress="#{$step}"] {
+      .progress__mask--full,
+      .progress__fill {
+        transform: rotate(($step * $rotationIncrement) + deg);
+      }
+    }
+  }
+}
