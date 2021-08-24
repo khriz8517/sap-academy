@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAP - Academy</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/progress-curso.css">
+    <link rel="stylesheet" href="./css/progress-bar.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
@@ -16,60 +23,144 @@
                 <div class="ws-foot">Completa cursos y gana puntos.</div>
             </div>
             <div class="points section">
-                <div class="indicator"></div>
-                <div class="progress-bar"></div>
-                <div class="pb-stages">
-                    
+                
+                <div class="progress-bar row">
+                    <div class="pb-porcentaje"></div>
+                    <div class="indicator">
+                        <img src="./images/indicator.png" alt="indicator">
+                    </div>
+                </div>
+                <div class="pb-stages row">
+                    <div class="stage">
+                        <div class="stage-number">0</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">1</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">2</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">3</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">4</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">5</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">6</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">7</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
+                    <div class="stage">
+                        <div class="stage-number">8</div>
+                        <div class="stage-drop">&#127778;</div>
+                        <div class="stage-points">
+                            <!-- <span class="material-icons icon">star</span> -->
+                            <span class="material-icons">star_outline</span>
+                            <span class="point-value">100</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="section">
                 <div class="cat-header row">
                     <div class="cat-header-title col-2">Categorías</div>
-                    <div class="cat-header-options col-6">
+                    <div class="cat-header-options col-10">
                         <a href="#" class="cat-header-option">
-                            <img src="" alt="">
+                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
                             Ver tutorial
                         </a>
                         <a href="#" class="cat-header-option">
-                            <img src="" alt="">
+                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
                             Ver mapa
                         </a>
                         <a href="#" class="cat-header-option">
-                            <img src="" alt="">
+                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
                             Crear curso
                         </a>
-                    </div>
-                    <div class="cat-header-search-input col-4">
-                        <input type="text" placeholder="¿Qué curso estás buscando?">
+                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?">
+                        <img class="lupa" src="./images/lupa.png" alt="lupa">
                     </div>
                 </div>
                 <div class="cat-options row">
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option active"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option active"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option disabled"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option disabled"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                     <div class="col-cat-option">
-                        <div class="cat-option"><img src="" alt="">Módulo SD</div>
+                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
                     </div>
                 </div>
             </div>
@@ -81,19 +172,17 @@
                             <img src="./images/curso.jpg" alt="">
                         </div>
                         <div class="curso-info">
-                            <div class="curso-name">Nombre del curso 1</div>
+                            <div class="curso-name">
+                                <label>Nombre del curso 1</label>
+                            </div>
                             <div class="curso-access-progress row">
-                                <div class="col-8">
+                                <div class="col-curso-access curso-access">
                                     <a href="#" class="curso-access-btn">Acceder</a>
                                 </div>
-                                <div class="col-4 curso-progress">
-                                    <div class="progress" data-progress="40">
-                                        <div class="progress__mask progress__mask--full">
-                                            <div class="progress__fill"></div>
-                                        </div>
-                                        <div class="progress__mask">
-                                            <div class="progress__fill"></div>
-                                        </div>
+                                <div class="col-curso-progress curso-progress">
+                                    <div class="progress">
+                                        <progress value="0" max="100"></progress>
+                                        <span>0%</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +190,45 @@
                     </div>
                 </div>
                 <div class="cursos-loadmore">
-                    <a href="#">Ver mas cursos de la categoría</a>
+                    <a class="green-grad_btn" href="#">Ver mas cursos de la categoría</a>
+                </div>
+            </div>
+            <div class="section">
+                <div>
+                    <a class="green-grad_btn" href="#">Ver módulos SAP academy</a>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-6">
+                        <div class="busq-title">Resultados de búsqueda "nombre"</div>
+                        <div class="busq-result">Hemos encontrado 2 cursos</div>
+                    </div>
+                    <div class="col-6 ta-r">
+                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?">
+                        <img class="lupa" src="./images/lupa.png" alt="lupa">
+                    </div>
+                </div>
+                <div class="cursos row">
+                    <div class="curso">
+                        <div class="curso-img">
+                            <img src="./images/curso.jpg" alt="">
+                        </div>
+                        <div class="curso-info">
+                            <div class="curso-name">
+                                <label>Nombre del curso 1</label>
+                            </div>
+                            <div class="curso-access-progress row">
+                                <div class="col-curso-access curso-access">
+                                    <a href="#" class="curso-access-btn">Acceder</a>
+                                </div>
+                                <div class="col-curso-progress curso-progress">
+                                    <div class="progress">
+                                        <progress value="0" max="100"></progress>
+                                        <span>0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
