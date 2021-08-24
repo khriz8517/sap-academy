@@ -11,7 +11,7 @@
 }
 
 .pb-porcentaje {
-  width: 10%;
+  width: 0%;
   height: var(--height);
   border-radius: 10px;
   background: transparent linear-gradient(90deg, #005cb9 0%, #1baeff 100%) 0% 0%

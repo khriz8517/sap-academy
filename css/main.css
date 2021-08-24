@@ -203,7 +203,12 @@ body {
   border: 1px solid #dcdcdc;
   border-radius: 23px;
   padding: 7px 100px 7px 10px;
-  /* float: right; */
+  font-family: GilroyLight;
+  font-size: 16px;
+}
+
+.search-input:focus-visible {
+  outline: none;
 }
 
 .lupa {
@@ -227,6 +232,10 @@ input::placeholder {
   padding: 1em 0;
   justify-content: space-between;
   /* display: inline-flex; */
+}
+
+hr {
+  border: 2px solid #dcdcdc;
 }
 
 .hexagon {
@@ -303,12 +312,6 @@ input::placeholder {
   padding-top: 15px;
 }
 
-.curso-access-progress {
-  /* height: 50%; */
-  /* top: 60px;
-  position: relative; */
-}
-
 .col-curso-access {
   width: 33.333%;
 }
@@ -319,10 +322,6 @@ input::placeholder {
 
 .curso-access {
   align-self: center;
-}
-
-.curso-progress {
-  /* align-self: flex-end; */
 }
 
 .curso-access-btn {
@@ -339,6 +338,7 @@ input::placeholder {
 
 .cursos-loadmore {
   text-align: center;
+  margin-top: 5em;
 }
 
 .green-grad_btn {

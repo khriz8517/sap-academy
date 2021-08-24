@@ -16,100 +16,27 @@
 </head>
 <body>
     <div id="app">
-        <main>
-            <div class="welcome section">
-                <div class="ws-head">Bienvenido a</div>
-                <div class="ws-title uppercase">sap academy</div>
-                <div class="ws-foot">Completa cursos y gana puntos.</div>
-            </div>
+        <div class="welcome section">
+            <div class="ws-head">{{welcome.head}}</div>
+            <div class="ws-title uppercase">{{welcome.title}}</div>
+            <div class="ws-foot">{{welcome.foot}}</div>
+        </div>
+        <div v-if="!searching">
             <div class="points section">
-                
                 <div class="progress-bar row">
-                    <div class="pb-porcentaje"></div>
+                    <div class="pb-porcentaje" :style="{width: progressbar+'%'}"></div>
                     <div class="indicator">
                         <img src="./images/indicator.png" alt="indicator">
                     </div>
                 </div>
                 <div class="pb-stages row">
-                    <div class="stage">
-                        <div class="stage-number">0</div>
+                    <div v-for="(item, index) in stages" :key="item.id" class="stage">
+                        <div class="stage-number">{{item.number}}</div>
                         <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">1</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">2</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">3</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">4</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">5</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">6</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">7</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
-                        </div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-number">8</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points">
-                            <!-- <span class="material-icons icon">star</span> -->
-                            <span class="material-icons">star_outline</span>
-                            <span class="point-value">100</span>
+                        <div class="stage-points" :class="item.estado ? '' : 'disabled'">
+                            <span v-if="item.estado === 1" class="material-icons icon">star</span>
+                            <span v-if="item.estado === 0" class="material-icons">star_outline</span>
+                            <span class="point-value">{{item.value}}</span>
                         </div>
                     </div>
                 </div>
@@ -130,59 +57,45 @@
                             <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
                             Crear curso
                         </a>
-                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?">
+                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
                         <img class="lupa" src="./images/lupa.png" alt="lupa">
                     </div>
                 </div>
                 <div class="cat-options row">
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option active"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option disabled"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
-                    </div>
-                    <div class="col-cat-option">
-                        <div class="cat-option"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">Módulo SD</div>
+                    <div v-for="(item, value) in categorias" class="col-cat-option" :key="item.id">
+                        <div 
+                            class="cat-option"
+                            :class="{active: item.id === selected_category_id}"
+                            v-if="(item.estado === 1)"
+                            @click="selected_category_id = item.id, 
+                            selected_category_text = item.cat_large"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">{{item.cat_short}}</div>
+                        <div 
+                            class="cat-option disabled"
+                            v-if="(item.estado === 0)"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">{{item.cat_short}}</div>
                     </div>
                 </div>
+                <hr>
             </div>
-            <div class="section">
-                <div class="cursos-title">Calidad</div>
+            
+            <div v-if="selected_category_id" class="section">
+                <div class="cursos-title">{{selected_category_text}}</div>
                 <div class="cursos row">
-                    <div class="curso">
+                    <div v-for="(item, value) in cursos" class="curso">
                         <div class="curso-img">
-                            <img src="./images/curso.jpg" alt="">
+                            <img :src="item.curso_img" alt="curso_img">
                         </div>
                         <div class="curso-info">
                             <div class="curso-name">
-                                <label>Nombre del curso 1</label>
+                                <label>{{item.curso}}</label>
                             </div>
                             <div class="curso-access-progress row">
                                 <div class="col-curso-access curso-access">
-                                    <a href="#" class="curso-access-btn">Acceder</a>
+                                    <a href="item.link" class="curso-access-btn">Acceder</a>
                                 </div>
                                 <div class="col-curso-progress curso-progress">
                                     <div class="progress">
-                                        <progress value="0" max="100"></progress>
-                                        <span>0%</span>
+                                        <progress :value="item.progress" max="100"></progress>
+                                        <span>{{item.progress}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -193,37 +106,40 @@
                     <a class="green-grad_btn" href="#">Ver mas cursos de la categoría</a>
                 </div>
             </div>
+            
+        </div>
+        <div v-if="searching">
             <div class="section">
                 <div>
-                    <a class="green-grad_btn" href="#">Ver módulos SAP academy</a>
+                    <a @click="searching = !searching, search_value = ''" class="green-grad_btn" href="#">Ver módulos SAP academy</a>
                 </div>
                 <div class="row pt-4">
                     <div class="col-6">
-                        <div class="busq-title">Resultados de búsqueda "nombre"</div>
-                        <div class="busq-result">Hemos encontrado 2 cursos</div>
+                        <div class="busq-title">Resultados de búsqueda "{{search_value}}"</div>
+                        <div class="busq-result">Hemos encontrado {{cursos_search.length}} cursos</div>
                     </div>
                     <div class="col-6 ta-r">
-                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?">
+                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
                         <img class="lupa" src="./images/lupa.png" alt="lupa">
                     </div>
                 </div>
                 <div class="cursos row">
-                    <div class="curso">
+                    <div v-for="(item, value) in cursos_search" class="curso">
                         <div class="curso-img">
-                            <img src="./images/curso.jpg" alt="">
+                            <img :src="item.curso_img" alt="curso_img">
                         </div>
                         <div class="curso-info">
                             <div class="curso-name">
-                                <label>Nombre del curso 1</label>
+                                <label>{{item.curso}}</label>
                             </div>
                             <div class="curso-access-progress row">
                                 <div class="col-curso-access curso-access">
-                                    <a href="#" class="curso-access-btn">Acceder</a>
+                                    <a href="item.link" class="curso-access-btn">Acceder</a>
                                 </div>
                                 <div class="col-curso-progress curso-progress">
                                     <div class="progress">
-                                        <progress value="0" max="100"></progress>
-                                        <span>0%</span>
+                                        <progress :value="item.progress" max="100"></progress>
+                                        <span>{{item.progress}}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -231,8 +147,9 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="./js/main.js"></script>
