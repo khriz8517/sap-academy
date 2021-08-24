@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data:{
-        searching: false,
+        searching: true,
         search_value: '',
         search_count: 0,
         welcome: {

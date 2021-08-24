@@ -64,65 +64,6 @@ body {
   width: 100%;
 }
 
-@media (min-width: 1100px) {
-  .section {
-    /* width: 100%; */
-    padding: 2em 8em;
-  }
-  .col-1 {
-    max-width: 8.333%;
-    flex: 0 0 8.333%;
-  }
-  .col-2 {
-    max-width: 16.666%;
-    flex: 0 0 16.666%;
-  }
-  .col-3 {
-    max-width: 25%;
-    flex: 0 0 25%;
-  }
-  .col-4 {
-    max-width: 33.333%;
-    flex: 0 0 33.333%;
-  }
-  .col-5 {
-    max-width: 41.666%;
-    flex: 0 0 41.666%;
-  }
-  .col-6 {
-    max-width: 50%;
-    flex: 0 0 50%;
-  }
-  .col-7 {
-    max-width: 58.333%;
-    flex: 0 0 58.333%;
-  }
-  .col-8 {
-    max-width: 66.666%;
-    flex: 0 0 66.666%;
-  }
-  .col-9 {
-    max-width: 75%;
-    flex: 0 0 75%;
-  }
-  .col-10 {
-    max-width: 83.333%;
-    flex: 0 0 83.333%;
-  }
-  .col-11 {
-    max-width: 91.666%;
-    flex: 0 0 91.666%;
-  }
-  .col-12 {
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
-  .col-cat-option {
-    max-width: 20%;
-    /* flex: 0 0 20%; */
-  }
-}
-
 .welcome {
   /* height: 155px; */
   background: transparent linear-gradient(90deg, #03a2b0 0%, #38e47d 100%) 0% 0%
@@ -175,6 +116,11 @@ body {
 
 .cat-header-options {
   text-align: right;
+  /* display: flex; */
+}
+
+.option-container {
+  float: right;
 }
 
 .cat-header-option {
@@ -185,7 +131,7 @@ body {
   color: #ffffff;
   font-size: 14px;
   text-decoration: none;
-  padding: 7px 30px 7px 5px;
+  padding: 9px 30px 9px 5px;
   margin: 0 5px;
   /* display: inline-flex; */
   font-family: GilroyLight;
@@ -205,6 +151,10 @@ body {
   padding: 7px 100px 7px 10px;
   font-family: GilroyLight;
   font-size: 16px;
+  background-image: url(../images/lupa.png);
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: right 10px bottom 10px;
 }
 
 .search-input:focus-visible {
@@ -339,6 +289,7 @@ hr {
 .cursos-loadmore {
   text-align: center;
   margin-top: 5em;
+  /* display: flex; */
 }
 
 .green-grad_btn {
@@ -358,6 +309,10 @@ hr {
   font-size: 28px;
 }
 
+.searching-talign-search-input {
+  text-align: right;
+}
+
 .busq-result {
   color: #085cb7;
   font-family: GothamMedium;
@@ -371,4 +326,114 @@ hr {
 
 .pt-4 {
   padding-top: 4em;
+}
+
+@media (min-width: 1100px) {
+  .section {
+    /* width: 100%; */
+    padding: 2em 8em;
+  }
+  .col-1 {
+    max-width: 8.333%;
+    flex: 0 0 8.333%;
+  }
+  .col-2 {
+    max-width: 16.666%;
+    flex: 0 0 16.666%;
+  }
+  .col-3 {
+    max-width: 25%;
+    flex: 0 0 25%;
+  }
+  .col-4 {
+    max-width: 33.333%;
+    flex: 0 0 33.333%;
+  }
+  .col-5 {
+    max-width: 41.666%;
+    flex: 0 0 41.666%;
+  }
+  .col-6 {
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+  .col-7 {
+    max-width: 58.333%;
+    flex: 0 0 58.333%;
+  }
+  .col-8 {
+    max-width: 66.666%;
+    flex: 0 0 66.666%;
+  }
+  .col-9 {
+    max-width: 75%;
+    flex: 0 0 75%;
+  }
+  .col-10 {
+    max-width: 83.333%;
+    flex: 0 0 83.333%;
+  }
+  .col-11 {
+    max-width: 91.666%;
+    flex: 0 0 91.666%;
+  }
+  .col-12 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .col-cat-option {
+    max-width: 20%;
+    /* flex: 0 0 20%; */
+  }
+}
+
+@media (max-width: 411px) {
+  .cursos-loadmore {
+    display: flex;
+  }
+  .searching-return {
+    display: flex;
+    text-align: center;
+  }
+  .green-grad_btn {
+    background: transparent linear-gradient(90deg, #03a2b0 0%, #38e47d 100%) 0%
+      0% no-repeat padding-box;
+    box-shadow: 0px 2px 3px #00000029;
+    border-radius: 23px;
+    color: #ffffff;
+    padding: 7px 0px;
+    text-decoration: none;
+    font-family: GilroyLight;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1212px) {
+  .search-input {
+    /* margin-top: 2em; */
+  }
+}
+
+@media (max-width: 540px) {
+  .option-container {
+    width: 100%;
+    text-align: center;
+    margin: 1em 0;
+    float: right;
+  }
+  .col-cat-option {
+    /* width: 20%; */
+    margin: 1em auto;
+  }
+  .stage-drop,
+  .stage-points {
+    display: none !important;
+  }
+  .curso {
+    margin: 10px auto;
+  }
+  .searching-talign-search-input {
+    text-align: center;
+    margin-bottom: 2em;
+  }
 }

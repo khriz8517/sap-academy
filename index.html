@@ -45,20 +45,27 @@
                 <div class="cat-header row">
                     <div class="cat-header-title col-2">Categorías</div>
                     <div class="cat-header-options col-10">
-                        <a href="#" class="cat-header-option">
-                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
-                            Ver tutorial
-                        </a>
-                        <a href="#" class="cat-header-option">
-                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
-                            Ver mapa
-                        </a>
-                        <a href="#" class="cat-header-option">
-                            <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">
-                            Crear curso
-                        </a>
-                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
-                        <img class="lupa" src="./images/lupa.png" alt="lupa">
+                        <div class="option-container">
+                            <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
+                        </div>
+                        <div class="option-container">
+                            <a href="#" class="cat-header-option">
+                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Crear curso
+                            </a>
+                        </div>
+                        <div class="option-container">
+                            <a href="#" class="cat-header-option">
+                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Ver mapa
+                            </a>
+                        </div>
+                        <div class="option-container">
+                            <a href="#" class="cat-header-option">
+                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Ver tutorial
+                            </a>
+                        </div>
+                        
+                        
+                        
                     </div>
                 </div>
                 <div class="cat-options row">
@@ -110,7 +117,7 @@
         </div>
         <div v-if="searching">
             <div class="section">
-                <div>
+                <div class="searching-return">
                     <a @click="searching = !searching, search_value = ''" class="green-grad_btn" href="#">Ver módulos SAP academy</a>
                 </div>
                 <div class="row pt-4">
@@ -118,9 +125,8 @@
                         <div class="busq-title">Resultados de búsqueda "{{search_value}}"</div>
                         <div class="busq-result">Hemos encontrado {{cursos_search.length}} cursos</div>
                     </div>
-                    <div class="col-6 ta-r">
+                    <div class="col-6 searching-talign-search-input">
                         <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
-                        <img class="lupa" src="./images/lupa.png" alt="lupa">
                     </div>
                 </div>
                 <div class="cursos row">
