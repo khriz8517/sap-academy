@@ -5,11 +5,16 @@ Vue.component('modal', {
             this.$emit('toggle-modal');
         }
     },
+    computed: {
+        modal_title: function(){
+            return this.total_points > 0 ? 'Felicidades tienes '+this.total_points+' puntos' : 'Bienvenido a SAP academy';
+        }
+    },
     template: `
         <div class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
-                    <h3>Felicidades tienes {{total_points}} puntos</h3>
+                    <h3>{{modal_title}}</h3>
                     <p>Completa cursos para ganar puntos y desbloquear módulos.</p>
                     <div class="modal-footer">
                         <a href="#" class="modal-btn green-grad_btn" @click="toggleModal()">Continuar</a>
@@ -82,7 +87,7 @@ var app = new Vue({
             this.progressbar = 30;
         },
         getTotalPoints: function(){
-            this.total_points = 100;
+            this.total_points = 0;
         },
         toggleModal : function(){
             this.showModal = !this.showModal;
