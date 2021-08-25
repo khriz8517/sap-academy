@@ -46,7 +46,7 @@
                     <div class="cat-header-title col-2">Categorías</div>
                     <div class="cat-header-options col-10">
                         <div class="option-container">
-                            <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
+                            <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searching = true" v-model="search_value">
                         </div>
                         <div class="option-container">
                             <a href="#" class="cat-header-option">
@@ -154,6 +154,7 @@
                 </div>
             </div>
         </div>
+        <modal :total_points="total_points" v-on:toggle-modal="toggleModal" v-show="showModal"></modal>
     </div>
     
 

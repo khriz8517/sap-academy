@@ -1,15 +1,38 @@
+Vue.component('modal', {
+    props: ['total_points'],
+    methods: {
+        toggleModal : function(){
+            this.$emit('toggle-modal');
+        }
+    },
+    template: `
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+                    <h3>Felicidades tienes {{total_points}} puntos</h3>
+                    <p>Completa cursos para ganar puntos y desbloquear módulos.</p>
+                    <div class="modal-footer">
+                        <a href="#" class="modal-btn green-grad_btn" @click="toggleModal()">Continuar</a>
+                    </div>
+                </div>
+            </div>
+        </div>`
+})
+
 var app = new Vue({
     el: '#app',
     data:{
-        searching: true,
+        searching: false,
         search_value: '',
         search_count: 0,
+        showModal: true,
         welcome: {
             head: 'Bienvenido a',
             title: 'sap academy',
             foot: 'Completa cursos y gana puntos.'
         },
         progressbar: 0,
+        total_points: 0,
         stages: [
             { id: 1, number: 0, value: 0, estado: 1 },
             { id: 2, number: 1, value: 50, estado: 1 },
@@ -48,38 +71,29 @@ var app = new Vue({
             { id: 11, cat_id: 5, curso: 'Nombre del Curso', curso_img: './images/curso.jpg', link: '#', progress: 30 },
             { id: 12, cat_id: 6, curso: 'Nombre del Curso', curso_img: './images/curso.jpg', link: '#', progress: 10 },
             { id: 13, cat_id: 6, curso: 'Nombre del Curso', curso_img: './images/curso.jpg', link: '#', progress: 90 }
-        ],
-        cursos: []
+        ]
     },
     created(){
         this.getProgressBarPercentage();
+        this.getTotalPoints();
     },
     methods: {
         getProgressBarPercentage: function(){
             this.progressbar = 30;
         },
-        searchCourse: function(){
-            this.searching = true;
-            for (let i = 0; i < this.cursos_pool.length; i++) {
-                var item = this.cursos_pool[i];
-                this.cursos_pool.filter((item) => item.curso.includes(this.search_value));
-            }
+        getTotalPoints: function(){
+            this.total_points = 100;
+        },
+        toggleModal : function(){
+            this.showModal = !this.showModal;
         }
     },
     computed: {
+        cursos: function (){
+            return this.cursos_pool.filter((item) => item.cat_id === this.selected_category_id);
+        },
         cursos_search: function (){
             return this.cursos_pool.filter((item) => item.curso.toLowerCase().includes(this.search_value));
-        },
-    },
-    watch: {
-        selected_category_id: function(newval, oldval){
-            this.cursos = [];
-            for (let i = 0; i < this.cursos_pool.length; i++) {
-                var item = this.cursos_pool[i];
-                if(item.cat_id == newval){
-                    this.cursos.push(item);
-                }
-            }
         }
     }
 })
