@@ -30,7 +30,7 @@ var app = new Vue({
         searching: false,
         search_value: '',
         search_count: 0,
-        showModal: true,
+        showModal: false,
         welcome: {
             head: 'Bienvenido a',
             title: 'sap academy',

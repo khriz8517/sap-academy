@@ -61,6 +61,11 @@
   color: #ffa215;
 }
 
+.star {
+  width: 20px;
+  padding: 2px 2px 3px;
+}
+
 .point-value {
   align-self: center;
   padding-left: 8px;

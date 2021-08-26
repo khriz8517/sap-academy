@@ -9,16 +9,12 @@
     <link rel="stylesheet" href="./css/progress-curso.css">
     <link rel="stylesheet" href="./css/progress-bar.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
         <div class="welcome section">
             <div class="ws-head">{{welcome.head}}</div>
-            <div class="ws-title uppercase">{{welcome.title}}</div>
+            <div class="ws-title">{{welcome.title}}</div>
             <div class="ws-foot">{{welcome.foot}}</div>
         </div>
         <div v-if="!searching">
@@ -26,7 +22,7 @@
                 <div class="progress-bar row">
                     <div class="pb-porcentaje" :style="{width: progressbar+'%'}"></div>
                     <div class="indicator">
-                        <img src="./images/indicator.png" alt="indicator">
+                        <img src="./images/pin.svg" alt="indicator">
                     </div>
                 </div>
                 <div class="pb-stages row">
@@ -34,7 +30,7 @@
                         <div class="stage-number">{{item.number}}</div>
                         <div class="stage-drop">&#127778;</div>
                         <div class="stage-points" :class="item.estado ? '' : 'disabled'">
-                            <span v-if="item.estado === 1" class="material-icons icon">star</span>
+                            <img v-if="item.estado === 1" class="star" src="./images/estrellita.svg" alt="star">
                             <span v-if="item.estado === 0" class="material-icons">star_outline</span>
                             <span class="point-value">{{item.value}}</span>
                         </div>
@@ -75,10 +71,10 @@
                             :class="{active: item.id === selected_category_id}"
                             v-if="(item.estado === 1)"
                             @click="selected_category_id = item.id, 
-                            selected_category_text = item.cat_large"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">{{item.cat_short}}</div>
+                            selected_category_text = item.cat_large"><img class="hexagon" src="./images/estrella.svg" alt="hexagon">{{item.cat_short}}</div>
                         <div 
                             class="cat-option disabled"
-                            v-if="(item.estado === 0)"><img class="hexagon" src="./images/hexagon.png" alt="hexagon">{{item.cat_short}}</div>
+                            v-if="(item.estado === 0)"><img class="hexagon" src="./images/estrella.svg" alt="hexagon">{{item.cat_short}}</div>
                     </div>
                 </div>
                 <hr>
@@ -97,7 +93,7 @@
                             </div>
                             <div class="curso-access-progress row">
                                 <div class="col-curso-access curso-access">
-                                    <a href="item.link" class="curso-access-btn">Acceder</a>
+                                    <a :href="item.link" class="curso-access-btn">Acceder</a>
                                 </div>
                                 <div class="col-curso-progress curso-progress">
                                     <div class="progress">
@@ -140,7 +136,7 @@
                             </div>
                             <div class="curso-access-progress row">
                                 <div class="col-curso-access curso-access">
-                                    <a href="item.link" class="curso-access-btn">Acceder</a>
+                                    <a :href="item.link" class="curso-access-btn">Acceder</a>
                                 </div>
                                 <div class="col-curso-progress curso-progress">
                                     <div class="progress">

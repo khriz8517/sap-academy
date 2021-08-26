@@ -65,38 +65,45 @@ body {
 }
 
 .welcome {
-  /* height: 155px; */
-  background: transparent linear-gradient(90deg, #03a2b0 0%, #38e47d 100%) 0% 0%
-    no-repeat padding-box;
+  height: 90px;
+  background-color: #03a2b0;
+  background-image: url(../images/fondo-cabecera.svg);
+  background-repeat: no-repeat;
+  background-position: right;
   color: #ffffff;
 }
 
+.welcome > div {
+  padding: 2px 0;
+}
+
 .ws-head {
-  font-size: 14px;
+  font-size: 15px;
   font-family: GothamBook;
 }
 
 .ws-title {
-  font-size: 30px;
+  font-size: 32px;
   text-transform: uppercase;
   font-weight: bold;
   font-family: GothamBold;
 }
 
 .ws-foot {
-  font-size: 13px;
+  font-size: 14px;
   font-family: GothamLight;
 }
 
 .points {
   background: #edf3fa 0% 0% no-repeat padding-box;
-  height: 6.5em;
+  height: 7.5em;
+  padding-top: 4em !important;
 }
 
 .indicator {
   position: relative;
   width: 0;
-  top: -68px;
+  top: -5.5em;
   left: -34px;
 }
 
@@ -152,9 +159,9 @@ body {
   font-family: GilroyLight;
   font-size: 16px;
   background-image: url(../images/lupa.png);
-  background-size: 13px;
+  background-size: 18px;
   background-repeat: no-repeat;
-  background-position: right 10px bottom 10px;
+  background-position: right 10px bottom 8px;
 }
 
 .search-input:focus-visible {
@@ -189,9 +196,9 @@ hr {
 }
 
 .hexagon {
-  width: 2em;
+  width: 1.8em;
   position: absolute;
-  left: 7px;
+  left: 8px;
   top: 4px;
 }
 
@@ -202,7 +209,7 @@ hr {
   border-radius: 28px;
   color: #ffffff;
   text-align: center;
-  padding: 10px 0;
+  padding: 11px 0;
   cursor: pointer;
   font-family: GilroyExtraBold;
   position: relative;
