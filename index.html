@@ -1,160 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP - Academy</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/progress-curso.css">
-    <link rel="stylesheet" href="./css/progress-bar.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <div class="welcome section">
-            <div class="ws-head">{{welcome.head}}</div>
-            <div class="ws-title">{{welcome.title}}</div>
-            <div class="ws-foot">{{welcome.foot}}</div>
-        </div>
-        <div v-if="!searching">
-            <div class="points section">
-                <div class="progress-bar row">
-                    <div class="pb-porcentaje" :style="{width: progressbar+'%'}"></div>
-                    <div class="indicator">
-                        <img src="./images/pin.svg" alt="indicator">
-                    </div>
-                </div>
-                <div class="pb-stages row">
-                    <div v-for="(item, index) in stages" :key="item.id" class="stage">
-                        <div class="stage-number">{{item.number}}</div>
-                        <div class="stage-drop">&#127778;</div>
-                        <div class="stage-points" :class="item.estado ? '' : 'disabled'">
-                            <img v-if="item.estado === 1" class="star" src="./images/estrellita.svg" alt="star">
-                            <span v-if="item.estado === 0" class="material-icons">star_outline</span>
-                            <span class="point-value">{{item.value}}</span>
-                        </div>
-                    </div>
-                </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SAP - Academy</title>
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/progress-curso.css" />
+        <link rel="stylesheet" href="./css/progress-bar.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+            rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="app">
+            <div class="welcome section">
+                <div class="ws-head">{{welcome.head}}</div>
+                <div class="ws-title">{{welcome.title}}</div>
+                <div class="ws-foot">{{welcome.foot}}</div>
             </div>
-            <div class="section">
-                <div class="cat-header row">
-                    <div class="cat-header-title col-2">Categorías</div>
-                    <div class="cat-header-options col-10">
-                        <div class="option-container">
-                            <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searching = true" v-model="search_value">
+            <div v-if="!searching">
+                <div class="points section">
+                    <div class="progress-bar row">
+                        <div
+                            class="pb-porcentaje"
+                            :style="{width: progressbar+'%'}"
+                        ></div>
+                        <div class="indicator">
+                            <img src="./images/pin.svg" alt="indicator" />
                         </div>
-                        <div class="option-container">
-                            <a href="#" class="cat-header-option">
-                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Crear curso
-                            </a>
-                        </div>
-                        <div class="option-container">
-                            <a href="#" class="cat-header-option">
-                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Ver mapa
-                            </a>
-                        </div>
-                        <div class="option-container">
-                            <a href="#" class="cat-header-option">
-                                <img class="cat-header-option-img" src="./images/control_point_white_24dp.svg" alt="plus">Ver tutorial
-                            </a>
-                        </div>
-                        
-                        
-                        
                     </div>
-                </div>
-                <div class="cat-options row">
-                    <div v-for="(item, value) in categorias" class="col-cat-option" :key="item.id">
-                        <div 
-                            class="cat-option"
-                            :class="{active: item.id === selected_category_id}"
-                            v-if="(item.estado === 1)"
-                            @click="selected_category_id = item.id, 
-                            selected_category_text = item.cat_large"><img class="hexagon" src="./images/estrella.svg" alt="hexagon">{{item.cat_short}}</div>
-                        <div 
-                            class="cat-option disabled"
-                            v-if="(item.estado === 0)"><img class="hexagon" src="./images/estrella.svg" alt="hexagon">{{item.cat_short}}</div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            
-            <div v-if="selected_category_id" class="section">
-                <div class="cursos-title">{{selected_category_text}}</div>
-                <div class="cursos row">
-                    <div v-for="(item, value) in cursos" class="curso">
-                        <div class="curso-img">
-                            <img :src="item.curso_img" alt="curso_img">
-                        </div>
-                        <div class="curso-info">
-                            <div class="curso-name">
-                                <label>{{item.curso}}</label>
-                            </div>
-                            <div class="curso-access-progress row">
-                                <div class="col-curso-access curso-access">
-                                    <a :href="item.link" class="curso-access-btn">Acceder</a>
-                                </div>
-                                <div class="col-curso-progress curso-progress">
-                                    <div class="progress">
-                                        <progress :value="item.progress" max="100"></progress>
-                                        <span>{{item.progress}}%</span>
-                                    </div>
-                                </div>
+                    <div class="pb-stages row">
+                        <div v-for="(item, index) in stages" class="stage">
+                            <div class="stage-number">{{item.number}}</div>
+                            <div class="stage-drop">&#127778;</div>
+                            <div
+                                class="stage-points"
+                                :class="item.estado ? '' : 'disabled'"
+                            >
+                                <img
+                                    v-if="item.estado === 1"
+                                    class="star"
+                                    src="./images/estrellita.svg"
+                                    alt="star"
+                                />
+                                <span
+                                    v-if="item.estado === 0"
+                                    class="material-icons"
+                                    >star_outline</span
+                                >
+                                <span class="point-value">{{item.value}}</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="cursos-loadmore">
-                    <a class="green-grad_btn" href="#">Ver mas cursos de la categoría</a>
-                </div>
-            </div>
-            
-        </div>
-        <div v-if="searching">
-            <div class="section">
-                <div class="searching-return">
-                    <a @click="searching = !searching, search_value = ''" class="green-grad_btn" href="#">Ver módulos SAP academy</a>
-                </div>
-                <div class="row pt-4">
-                    <div class="col-6">
-                        <div class="busq-title">Resultados de búsqueda "{{search_value}}"</div>
-                        <div class="busq-result">Hemos encontrado {{cursos_search.length}} cursos</div>
+                    <div class="nav-arrow">
+                        <span class="material-icons"> expand_more </span>
                     </div>
-                    <div class="col-6 searching-talign-search-input">
-                        <input class="search-input" type="text" placeholder="¿Qué curso estás buscando?" @keyup.enter="searchCourse" v-model="search_value">
-                    </div>
-                </div>
-                <div class="cursos row">
-                    <div v-for="(item, value) in cursos_search" class="curso">
-                        <div class="curso-img">
-                            <img :src="item.curso_img" alt="curso_img">
-                        </div>
-                        <div class="curso-info">
-                            <div class="curso-name">
-                                <label>{{item.curso}}</label>
-                            </div>
-                            <div class="curso-access-progress row">
-                                <div class="col-curso-access curso-access">
-                                    <a :href="item.link" class="curso-access-btn">Acceder</a>
-                                </div>
-                                <div class="col-curso-progress curso-progress">
-                                    <div class="progress">
-                                        <progress :value="item.progress" max="100"></progress>
-                                        <span>{{item.progress}}%</span>
-                                    </div>
-                                </div>
+                    <div class="details row">
+                        <div class="d-panel col-3">
+                            <div class="d-panel-title ta-c">Progreso</div>
+                            <div class=""></div>
+                            <div class="">
+                                <ul>
+                                    <li class="completed">
+                                        Completados (0 cursos)
+                                    </li>
+                                    <li class="in-progress">
+                                        En progreso (0 cursos)
+                                    </li>
+                                    <li class="no-started">
+                                        No iniciados (0 cursos)
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <modal :total_points="total_points" v-on:toggle-modal="toggleModal" v-show="showModal"></modal>
-    </div>
-    
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="./js/main.js"></script>
-</body>
+                        <div class="d-panel col-8">
+                            <div class="d-panel-title">Detalle por módulo</div>
+                            <div class="d-panel-description">
+                                Da clic a cada módulo para ver detalles
+                            </div>
+                            <div>
+                                <table class="d-table">
+                                    <tr class="table-headers">
+                                        <th>MÓDULO</th>
+                                        <th>COMPLETADOS</th>
+                                        <th>EN PROGRESO</th>
+                                        <th>NO INICIADOS</th>
+                                        <th>NOTA PROMEDIO (%)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Módulo SD</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>45%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Módulo SD</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>45%</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="cat-header row">
+                        <div class="cat-header-title col-2">Módulos</div>
+                        <div class="cat-header-options col-10">
+                            <div class="option-container">
+                                <a href="#" class="cat-header-option">
+                                    Crear curso
+                                </a>
+                            </div>
+                            <div class="option-container">
+                                <a href="#" class="cat-header-option">
+                                    Mi Ruta
+                                </a>
+                            </div>
+                            <div class="option-container">
+                                <a href="#" class="cat-header-option">
+                                    Presentación
+                                </a>
+                            </div>
+                            <div class="option-container">
+                                <input
+                                    class="search-input"
+                                    type="text"
+                                    placeholder="¿Qué curso estás buscando?"
+                                    @keyup.enter="searching = true"
+                                    v-model="search_value"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cat-description">
+                        Selecciona un módulo para que puedas llevar un curso.
+                    </div>
+                    <div class="cat-options row">
+                        <div
+                            v-for="(item, value) in categorias"
+                            class="col-cat-option"
+                            :key="item.id"
+                        >
+                            <div
+                                class="cat-option"
+                                :class="{active: item.id === selected_category_id}"
+                                @click="selected_category_id = item.id, selected_category_text = item.cat_large"
+                            >
+                                <div class="cato-title">{{item.cat_short}}</div>
+                                <div class="cato-progress-body">
+                                    <div class="cato-progress-star">
+                                        <img
+                                            src="./images/estrella.svg"
+                                            alt="estrella"
+                                        />
+                                    </div>
+                                    <div class="cato-progress-bar">
+                                        <div class="cato-progress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <div v-if="selected_category_id" class="section">
+                    <div class="cursos-title">{{selected_category_text}}</div>
+                    <div class="cursos row">
+                        <div v-for="(item, value) in cursos" class="curso">
+                            <div class="curso-img">
+                                <img :src="item.curso_img" alt="curso_img" />
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-name">
+                                    <label>{{item.curso}}</label>
+                                </div>
+                                <div class="curso-access-progress row">
+                                    <div class="col-curso-access curso-access">
+                                        <a
+                                            :href="item.link"
+                                            class="curso-access-btn"
+                                            >Acceder</a
+                                        >
+                                    </div>
+                                    <div
+                                        class="
+                                            col-curso-progress
+                                            curso-progress
+                                        "
+                                    >
+                                        <div class="progress">
+                                            <progress
+                                                :value="item.progress"
+                                                max="100"
+                                            ></progress>
+                                            <span>{{item.progress}}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cursos-loadmore">
+                        <a class="green-grad_btn" href="#"
+                            >Ver mas cursos de la categoría</a
+                        >
+                    </div>
+                </div>
+            </div>
+            <div v-if="searching">
+                <div class="section">
+                    <div class="searching-return">
+                        <a
+                            @click="searching = !searching, search_value = ''"
+                            class="green-grad_btn"
+                            href="#"
+                            >Ver módulos SAP academy</a
+                        >
+                    </div>
+                    <div class="row pt-4">
+                        <div class="col-6">
+                            <div class="busq-title">
+                                Resultados de búsqueda "{{search_value}}"
+                            </div>
+                            <div class="busq-result">
+                                Hemos encontrado {{cursos_search.length}} cursos
+                            </div>
+                        </div>
+                        <div class="col-6 searching-talign-search-input">
+                            <input
+                                class="search-input"
+                                type="text"
+                                placeholder="¿Qué curso estás buscando?"
+                                @keyup.enter="searchCourse"
+                                v-model="search_value"
+                            />
+                        </div>
+                    </div>
+                    <div class="cursos row">
+                        <div
+                            v-for="(item, value) in cursos_search"
+                            class="curso"
+                        >
+                            <div class="curso-img">
+                                <img :src="item.curso_img" alt="curso_img" />
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-name">
+                                    <label>{{item.curso}}</label>
+                                </div>
+                                <div class="curso-access-progress row">
+                                    <div class="col-curso-access curso-access">
+                                        <a
+                                            :href="item.link"
+                                            class="curso-access-btn"
+                                            >Acceder</a
+                                        >
+                                    </div>
+                                    <div
+                                        class="
+                                            col-curso-progress
+                                            curso-progress
+                                        "
+                                    >
+                                        <div class="progress">
+                                            <progress
+                                                :value="item.progress"
+                                                max="100"
+                                            ></progress>
+                                            <span>{{item.progress}}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <modal
+                :total_points="total_points"
+                v-on:toggle-modal="toggleModal"
+                v-show="showModal"
+            ></modal>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
 </html>
