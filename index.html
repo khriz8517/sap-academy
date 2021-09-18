@@ -71,28 +71,40 @@
                         <div class="d-panel col-3">
                             <div class="d-panel-title ta-c">Progreso</div>
                             <div class=""></div>
-                            <div class="">
+                            <div class="d-flex">
                                 <ul>
                                     <li class="completed">
-                                        Completados (0 cursos)
+                                        <span>Completados (0 cursos)</span>
                                     </li>
                                     <li class="in-progress">
-                                        En progreso (0 cursos)
+                                        <span>En progreso (0 cursos)</span>
                                     </li>
                                     <li class="no-started">
-                                        No iniciados (0 cursos)
+                                        <span>No iniciados (0 cursos)</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="d-panel col-8">
-                            <div class="d-panel-title">Detalle por módulo</div>
+                            <div class="d-panel-title">
+                                Detalle por módulo
+                                <span
+                                    v-if="showTableDetails === true"
+                                    @click="showTableDetails = false"
+                                    class="material-icons-outlined"
+                                >
+                                    chevron_left
+                                </span>
+                            </div>
                             <div class="d-panel-description">
                                 Da clic a cada módulo para ver detalles
                             </div>
                             <div>
-                                <table class="d-table">
+                                <table
+                                    v-if="showTableDetails === false"
+                                    class="d-table"
+                                >
                                     <tr class="table-headers">
                                         <th>MÓDULO</th>
                                         <th>COMPLETADOS</th>
@@ -100,19 +112,33 @@
                                         <th>NO INICIADOS</th>
                                         <th>NOTA PROMEDIO (%)</th>
                                     </tr>
-                                    <tr>
-                                        <td>Módulo SD</td>
-                                        <td>5</td>
-                                        <td>4</td>
-                                        <td>2</td>
-                                        <td>45%</td>
+                                    <tr v-for="mod in modulos">
+                                        <td
+                                            @click="showTableDetails = true, coursesByModuleId = mod.id"
+                                        >
+                                            {{mod.mod_short}}
+                                        </td>
+                                        <td>{{getCourses(mod.id, 0)}}</td>
+                                        <td>{{getCourses(mod.id, 1)}}</td>
+                                        <td>{{getCourses(mod.id, 2)}}</td>
+                                        <td>{{getCourses(mod.id, 3)}}%</td>
                                     </tr>
-                                    <tr>
-                                        <td>Módulo SD</td>
-                                        <td>5</td>
-                                        <td>4</td>
-                                        <td>2</td>
-                                        <td>45%</td>
+                                </table>
+                                <table
+                                    v-if="showTableDetails === true"
+                                    class="d-table"
+                                >
+                                    <tr class="table-headers">
+                                        <th>{{moduloName}}</th>
+                                        <th>ESTADO</th>
+                                        <th>NOTA (%)</th>
+                                        <th>INTENTOS</th>
+                                    </tr>
+                                    <tr v-for="course in detalleModulo">
+                                        <td>{{course.curso}}</td>
+                                        <td>{{getEstado(course.estado)}}</td>
+                                        <td>{{course.nota}}</td>
+                                        <td>{{course.intentos}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -154,16 +180,16 @@
                     </div>
                     <div class="cat-options row">
                         <div
-                            v-for="(item, value) in categorias"
+                            v-for="(item, value) in modulos"
                             class="col-cat-option"
                             :key="item.id"
                         >
                             <div
                                 class="cat-option"
-                                :class="{active: item.id === selected_category_id}"
-                                @click="selected_category_id = item.id, selected_category_text = item.cat_large"
+                                :class="{active: item.id === selected_module_id}"
+                                @click="selected_module_id = item.id, selected_category_text = item.mod_large"
                             >
-                                <div class="cato-title">{{item.cat_short}}</div>
+                                <div class="cato-title">{{item.mod_short}}</div>
                                 <div class="cato-progress-body">
                                     <div class="cato-progress-star">
                                         <img
@@ -172,7 +198,10 @@
                                         />
                                     </div>
                                     <div class="cato-progress-bar">
-                                        <div class="cato-progress"></div>
+                                        <div
+                                            class="cato-progress"
+                                            :style="{width: item.progress+'%'}"
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +210,7 @@
                     <hr />
                 </div>
 
-                <div v-if="selected_category_id" class="section">
+                <div v-if="selected_module_id" class="section">
                     <div class="cursos-title">{{selected_category_text}}</div>
                     <div class="cursos row">
                         <div v-for="(item, value) in cursos" class="curso">
