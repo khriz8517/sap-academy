@@ -29,10 +29,15 @@
                     allowfullscreen
                 ></iframe>
                 <div class="nav-arrow">
-                    <span class="material-icons"> expand_more </span>
+                    <span
+                        class="material-icons"
+                        @click="scrollToElement('sec-2')"
+                    >
+                        expand_more
+                    </span>
                 </div>
             </div>
-            <div class="section">
+            <div class="section sec-2">
                 <iframe
                     src="https://www.youtube.com/embed/9b186sCvJio"
                     title="YouTube video player"
@@ -41,10 +46,15 @@
                     allowfullscreen
                 ></iframe>
                 <div class="nav-arrow">
-                    <span class="material-icons"> expand_more </span>
+                    <span
+                        class="material-icons"
+                        @click="scrollToElement('sec-3')"
+                    >
+                        expand_more
+                    </span>
                 </div>
             </div>
-            <div class="section bg-gray">
+            <div class="section bg-gray sec-3">
                 <div class="s-title">Procesos</div>
                 <div class="s-description">
                     <span>Marca</span> los procesos que ya revisaste para

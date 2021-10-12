@@ -59,11 +59,11 @@ var app = new Vue({
         toggleModal: function () {
             this.showModal = !this.showModal;
         },
-        scrollToElement: function (options) {
-            const el = this.$el.getElementsByClassName("index-50")[0];
+        scrollToElement: function (goTo) {
+            const el = this.$el.getElementsByClassName(goTo)[0];
 
             if (el) {
-                el.scrollIntoView(options);
+                el.scrollIntoView({ behavior: "smooth" });
             }
         },
     },
