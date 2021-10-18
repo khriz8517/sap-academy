@@ -44,6 +44,7 @@ body {
     max-width: 100%;
     text-align: center;
     margin: 0 auto;
+    min-height: 22em;
 }
 .cs-steps-container {
     padding: 1em;
@@ -93,10 +94,28 @@ body {
     height: 180px;
     margin-bottom: 0.5em;
     cursor: pointer;
+    padding: 0.3em;
+    position: relative;
+    z-index: 4;
 }
-.css1-fileupload span {
+.css1-fileupload img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+.css1-fileupload span.cs-icon {
     font-size: 4em;
     padding-top: 0.8em;
+}
+span.cs-cancel {
+    position: absolute;
+    top: -6px;
+    right: 6px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 100;
+    color: #8a8a8a;
 }
 .acceptedfiles {
     color: #8a8a8a;
@@ -106,6 +125,7 @@ body {
 .cs-form {
     width: 21em;
     max-width: 100%;
+    position: relative;
 }
 .decoration {
     background: transparent linear-gradient(180deg, #03a2b0 0%, #38e47d 100%) 0%
@@ -124,15 +144,43 @@ body {
     border: 1px solid #cdcdcc;
     border-radius: 20px;
     height: 2.2em;
-    width: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
     padding-left: 1.5em;
     font-family: GilroyLight;
+    color: #8a8a8a;
 }
 .form-input:focus {
     outline: none;
 }
 .form-input::placeholder {
     font-family: GilroyLight;
+}
+.selected_options {
+    width: 100%;
+    padding: 0 0 0 2em;
+}
+.selected_options ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5em 0;
+}
+.selected_options ul li {
+    background: #707070 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 25px 5px 15px;
+    display: inline-block;
+    margin: 3px 5px;
+    font-family: GilroyLight;
+    font-size: 11px;
+}
+.search-choice-close {
+    position: relative;
+    cursor: pointer;
+    right: -12px;
 }
 textarea.form-input {
     resize: none;
@@ -163,6 +211,10 @@ textarea.form-input {
     padding: 0.7em 2.5em;
     font-family: GilroyLight;
     cursor: pointer;
+    text-decoration: none;
+}
+a.btn-green {
+    font-size: 0.8em;
 }
 .css2-title {
     color: #dd4eb5;
@@ -183,8 +235,17 @@ textarea.form-input {
     display: flex;
     max-width: 100%;
     width: 40em;
+    position: relative;
 }
-
+.css2-cancel {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50%;
+    color: #8a8a8a;
+}
 .msb-option-body {
     padding: 12px 0.5em 12px 2em;
     width: 100%;
@@ -212,20 +273,33 @@ textarea.form-input {
     font-size: 35px;
     padding: 17px 0 0 0px;
 }
-.msb-option-title span {
+.msb-option-title input {
     color: #dd4eb5;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: "Nunito", sans-serif;
+}
+.msb-option-title input:focus {
+    outline: none;
+}
+.msb-option-title input::placeholder {
+    color: #dd4eb5;
 }
 .css2-hr {
     max-width: 100%;
     width: 20em;
     margin: 0 0 0.5em -0.4em;
     border: 1px solid #00000029;
+    display: table-cell;
 }
 .msb-bg-red {
-    background-image: url(../images/rosado.svg);
+    cursor: pointer;
+    border-radius: 11px 0 0 11px;
+    background: transparent linear-gradient(90deg, #e73c3c 0%, #dd4fba 100%) 0%
+        0% no-repeat padding-box;
 }
 .css2-add-contenido {
     padding: 1em;
@@ -275,10 +349,12 @@ textarea.form-input {
 .css3-preguntas {
     /* padding: 1em; */
     display: inline-flex;
-    /* width: 100%; */
+    width: 75%;
+    max-width: 100%;
     text-align: center;
 }
 .css3p-col-6 {
+    width: 50%;
 }
 .pregunta {
     background: #edf3fa 0% 0% no-repeat padding-box;
@@ -386,4 +462,16 @@ textarea:focus {
 .css4-adde-btn span {
     font-size: 4em;
     padding-top: 0.4em;
+}
+.disabled {
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}
+.css5-title {
+    color: #1cc198;
+    font-size: 1.5em;
+    font-family: GothamBook;
+    width: 20em;
+    margin: 0 auto 1em;
+    max-width: 100%;
 }

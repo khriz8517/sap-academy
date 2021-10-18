@@ -37,24 +37,34 @@
     height: 3em;
     border-radius: 50%;
     color: #ffffff;
-    font-family: GilroyExtraBold;
     background: transparent linear-gradient(139deg, #03a2b0 0%, #38e47d 100%) 0%
         0% no-repeat padding-box;
+    display: flex;
+    z-index: 5;
+}
+.mh-num span {
+    font-size: 2em;
+    font-family: GilroyExtraBold;
+    align-self: center;
+    flex: 1;
 }
 .mh-text {
-    height: 3em;
+    /* height: 3em; */
     background: transparent linear-gradient(165deg, #039401 0%, #abdf37 100%) 0%
         0% no-repeat padding-box;
     border-radius: 15px;
     color: #ffffff;
     font-size: 0.8em;
-    padding: 0 4em;
+    padding: 1.2em 4em;
     font-family: GilroyLight;
+    position: relative;
+    left: -1em;
 }
 .modal-form {
     text-align: left;
     font-family: GilroyLight;
     font-size: 0.8em;
+    margin-top: 3em;
 }
 .modal-form textarea {
     background: #edf3fa 0% 0% no-repeat padding-box;
@@ -65,6 +75,7 @@
     padding: 1em 0 1em 1em;
     overflow: hidden;
     width: -webkit-fill-available;
+    width: -moz-available;
     font-family: GilroyLight;
 }
 .modal-form input[type="text"] {
@@ -74,6 +85,7 @@
     height: 0.5em;
     padding: 1em 0 1em 1em;
     width: -webkit-fill-available;
+    width: -moz-available;
     font-family: GilroyLight;
 }
 .modal-form input[type="text"]:focus {

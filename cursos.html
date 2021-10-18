@@ -40,14 +40,36 @@
                         </div>
                         <div class="cs-row jc-se">
                             <div class="cs-form">
-                                <div class="css1-fileupload">
-                                    <span class="material-icons-round">
+                                <span
+                                    v-if="hasFile"
+                                    class="material-icons cs-cancel"
+                                    @click="clearInputFile()"
+                                >
+                                    cancel
+                                </span>
+                                <div
+                                    class="css1-fileupload"
+                                    @click="$refs.file.click()"
+                                >
+                                    <img v-if="hasFile" :src="file" alt="" />
+                                    <span
+                                        v-if="!hasFile"
+                                        class="material-icons-round cs-icon"
+                                    >
                                         control_point
                                     </span>
                                 </div>
                                 <div class="acceptedfiles">
                                     600 x 354 px | .jpg y .png
                                 </div>
+                                <input
+                                    v-show="false"
+                                    type="file"
+                                    ref="file"
+                                    name="curso_img_file"
+                                    @change="selectedFile"
+                                    accept=".jpg,.png"
+                                />
                             </div>
                             <div class="cs-form">
                                 <div class="cs-row">
@@ -57,15 +79,25 @@
                                             class="form-input"
                                             type="text"
                                             placeholder="¿Cómo se llama el curso?"
+                                            v-model="curso_obj.step1.curso_name"
                                         />
                                     </div>
                                 </div>
                                 <div class="cs-row">
                                     <div class="decoration"></div>
                                     <div class="fi-container">
-                                        <select class="form-input">
+                                        <select
+                                            class="form-input"
+                                            v-model="curso_obj.step1.categoria"
+                                        >
                                             <option value="0">
                                                 ¿A qué módulo lo agregamos?
+                                            </option>
+                                            <option
+                                                v-for="item in modulos"
+                                                :value="item.id"
+                                            >
+                                                {{item.mod_short}}
                                             </option>
                                         </select>
                                     </div>
@@ -73,11 +105,37 @@
                                 <div class="cs-row">
                                     <div class="decoration"></div>
                                     <div class="fi-container">
-                                        <select class="form-input">
+                                        <select
+                                            class="form-input"
+                                            @change="participanteOnChange(keyP, $event.target.options[keyP].textContent )"
+                                            v-model="keyP"
+                                        >
                                             <option value="0">
                                                 ¿A quiénes va dirigido?
                                             </option>
+                                            <option
+                                                v-for="item in participantes"
+                                                :value="item.id"
+                                            >
+                                                {{item.grupo_participante}}
+                                            </option>
                                         </select>
+                                    </div>
+                                    <div class="selected_options">
+                                        <ul>
+                                            <li
+                                                class=""
+                                                v-for="(v, i) in tagP"
+                                                :key="v.id"
+                                            >
+                                                <span>{{v.text}}</span>
+                                                <span
+                                                    @click="deleteFromTagP(i)"
+                                                    class="search-choice-close"
+                                                    >x</span
+                                                >
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="cs-row">
@@ -95,7 +153,12 @@
                         </div>
                         <div class="btn-container">
                             <button class="btn-gray">Cancelar</button>
-                            <button class="btn-green" @click="wizardstep = 2">
+                            <button
+                                class="btn-green"
+                                @click="wizardstep = 2"
+                                :class="{disabled : validateStep1}"
+                                :disabled="validateStep1"
+                            >
                                 Siguiente
                             </button>
                         </div>
@@ -103,46 +166,32 @@
                     <div v-show="wizardstep == 2" class="cs-step2">
                         <div class="css2-title">Agrega contenido al curso</div>
                         <div class="css2-contenidos">
-                            <div class="msb-option">
-                                <div class="msb-bg msb-bg-red">
-                                    <span class="material-icons-outlined"
-                                        >attach_file</span
-                                    >
-                                </div>
-                                <div class="msb-option-body">
-                                    <div class="msb-option-header">
-                                        <div class="msb-option-title">
-                                            <span>Añade un nombre</span>
-                                        </div>
-                                    </div>
-                                    <div class="css2-hr"></div>
-                                    <div class="msb-option-sub">
-                                        Archivos permitidos: jpg, png, pdf, ppt,
-                                        docs, xls, mp4
-                                    </div>
-                                </div>
-                            </div>
+                            <css2-option
+                                v-for="(item, index) in contenidos"
+                                :contenido="item"
+                                :index="index"
+                                v-on:remove-contenido="removeContenido($event)"
+                                v-on:update-content="updateContent($event)"
+                                :key="item.id"
+                            ></css2-option>
                         </div>
                         <div class="css2-add-contenido">
-                            <div class="css2-addc-btn">
+                            <div class="css2-addc-btn" @click="addContenido">
                                 <span class="material-icons-outlined">
                                     add_box
                                 </span>
-                            </div>
-                        </div>
-                        <div class="css2-step-points">
-                            <div class="">
-                                <div class="point active"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
                             </div>
                         </div>
                         <div class="btn-container">
                             <button class="btn-gray" @click="wizardstep = 1">
                                 Atrás
                             </button>
-                            <button class="btn-green" @click="wizardstep = 3">
+                            <button
+                                class="btn-green"
+                                @click="wizardstep = 3"
+                                :class="{disabled: contenidos.length == 0}"
+                                :disabled="contenidos.length == 0"
+                            >
                                 Siguiente
                             </button>
                         </div>
@@ -156,11 +205,12 @@
                                 <div
                                     v-for="x in range(1, 5)"
                                     class="pregunta"
-                                    @click="num_preg = x, toggleModal()"
+                                    :class="{disabled: (x > preguntas_enabled && x > 1) }"
+                                    @click="num_preg = x, toggleModal(x > preguntas_enabled && x > 1)"
                                 >
                                     <div class="preg-num">{{x}}</div>
                                     <span class="preg-text">
-                                        ¿Cuáles son las verduras más verdes que
+                                        {{css3_preg_title(x)}}
                                     </span>
                                 </div>
                             </div>
@@ -168,11 +218,12 @@
                                 <div
                                     v-for="x in range(6, 10)"
                                     class="pregunta"
-                                    @click="num_preg = x, toggleModal()"
+                                    :class="{disabled: (x > preguntas_enabled && x > 1) }"
+                                    @click="num_preg = x, toggleModal(x > preguntas_enabled && x > 1)"
                                 >
                                     <div class="preg-num">{{x}}</div>
                                     <span class="preg-text">
-                                        ¿Cuáles son las verduras más verdes que
+                                        {{css3_preg_title(x)}}
                                     </span>
                                 </div>
                             </div>
@@ -185,7 +236,12 @@
                             <button class="btn-gray" @click="wizardstep = 2">
                                 Atrás
                             </button>
-                            <button class="btn-green" @click="wizardstep = 4">
+                            <button
+                                class="btn-green"
+                                @click="wizardstep = 4"
+                                :class="{disabled: preguntas.length<2}"
+                                :disabled="preguntas.length<2"
+                            >
                                 Siguiente
                             </button>
                         </div>
@@ -193,26 +249,17 @@
                     <div v-show="wizardstep == 4" class="cs-step4">
                         <div class="css4-title">Agrega ejercicios</div>
                         <div class="css4-ejercicios">
-                            <div class="css4-ejercicio">
-                                <span class="material-icons"> cancel </span>
-                                <div class="ejercicio-title">
-                                    <input
-                                        type="text"
-                                        placeholder="Añade un título al ejercicio"
-                                    />
-                                </div>
-                                <div class="ejercicio-hr"></div>
-                                <div class="ejercicio-indicacion">
-                                    <textarea
-                                        cols="30"
-                                        rows="10"
-                                        placeholder="Agrega indicaciones al ejercicio..."
-                                    ></textarea>
-                                </div>
-                            </div>
+                            <css4-option
+                                v-for="(item, index) in ejercicios"
+                                :ejercicio="item"
+                                :index="index"
+                                v-on:remove-ejercicio="removeEjercicio($event)"
+                                v-on:update-ejercicio="updateEjercicio($event)"
+                                :key="item.id"
+                            ></css4-option>
                         </div>
                         <div class="css4-add-ejercicio">
-                            <div class="css4-adde-btn">
+                            <div class="css4-adde-btn" @click="addEjercicio">
                                 <span class="material-icons-outlined">
                                     add_box
                                 </span>
@@ -222,9 +269,25 @@
                             <button class="btn-gray" @click="wizardstep = 3">
                                 Atrás
                             </button>
-                            <button class="btn-green" @click="">
-                                Siguiente
+                            <button
+                                class="btn-green"
+                                @click="publicarCurso"
+                                :class="{disabled: ejercicios.length == 0}"
+                                :disabled="ejercicios.length == 0"
+                            >
+                                Publicar curso
                             </button>
+                        </div>
+                    </div>
+                    <div v-show="wizardstep == 5" class="cs-step5">
+                        <div class="css5-title">
+                            ¡Felicidades, tu curso ha sido creado y publicado
+                            con éxito!
+                        </div>
+                        <div class="btn-container">
+                            <a :href="link_curso" class="btn-green">
+                                Ver mi curso
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -232,6 +295,7 @@
             <modal
                 :num_preg="num_preg"
                 v-on:toggle-modal="toggleModal"
+                v-on:guardar-pregunta="guardarPregunta($event)"
                 v-show="showModal"
             ></modal>
         </div>
